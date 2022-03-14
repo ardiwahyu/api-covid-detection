@@ -1,7 +1,11 @@
 const multer  = require('multer');
 const path = require('path');
+const fs = require('fs')
 
 const uploadFolder = __dirname + '../../../uploads';
+if(!fs.existsSync(uploadFolder)) {
+    fs.mkdirSync(uploadFolder);
+}
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -9,7 +13,7 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         let datetimestamp = Date.now();
-        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
+        cb(null, "cough_sound" + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
     }
 })
 
