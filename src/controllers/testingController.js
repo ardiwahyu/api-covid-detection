@@ -15,8 +15,8 @@ module.exports = {
                 errorMessage.error = status.error;
             }
             successMessage.file = req.file;
-            successMessage.value = parseFloat(results[0]);
-            successMessage.status = results[1];
+            // successMessage.value = parseFloat(results[0]);
+            successMessage.status = results;
             res.send(successMessage);
         });
     }
