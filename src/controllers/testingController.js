@@ -11,7 +11,7 @@ module.exports = {
         var options = {args: [req.file.filename]};
           
         const python = spawn('python', [testDir, req.file.filename]);
-        var results
+        var results = []
         python.stdout.on('data', function (data) {
             results = data.toString().split('\r\n');
         })
