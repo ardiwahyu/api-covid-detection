@@ -14,7 +14,7 @@ module.exports = {
         var results = []
         python.stdout.on('data', function (data) {
             console.log("from py");
-            successMessage.data = data.toString();
+            successMessage.data = ""+data.toString();
             results = data.toString().split('\r\n');
         })
         python.on('close', (code) => {
