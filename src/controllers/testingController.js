@@ -17,8 +17,8 @@ module.exports = {
         })
         python.on('close', (code) => {
             successMessage.file = req.file;
-            successMessage.value = parseFloat(results[0]);
-            successMessage.status = results[1];
+            // successMessage.value = parseFloat(results[0]);
+            successMessage.status = results;
             res.send(successMessage);
         })
     }
