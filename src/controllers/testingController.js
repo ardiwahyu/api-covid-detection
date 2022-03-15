@@ -10,7 +10,7 @@ module.exports = {
 
         var options = {args: [req.file.filename]};
           
-        const python = spawn('python', [testDir, req.file.filename]);
+        const python = spawn('unbuffer','python', [testDir, req.file.filename]);
         var results = []
         python.stdout.on('data', function (data) {
             console.log("from py");
