@@ -13,6 +13,7 @@ module.exports = {
         const python = spawn('python', [testDir, req.file.filename]);
         var results = []
         python.stdout.on('data', function (data) {
+            successMessage.data = data.toString();
             results = data.toString().split('\r\n');
         })
         python.on('close', (code) => {
