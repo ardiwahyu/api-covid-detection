@@ -2,22 +2,24 @@
 
 const { status, successMessage, errorMessage } = require('../helpers/payload');
 const PythonShell = require('python-shell').PythonShell;
+const {spawn} = require('child_process');
 
 module.exports = {
     postSoundToTest: async (req, res) => {
-        const testDir = '/app/src/controllers/detection/testing.py';
+        const testDir = __dirname + '/detection/testing.py';
 
         var options = {args: [req.file.filename]};
           
-        PythonShell.run(testDir, options, function (err, results) {
-            if (err) {
-                errorMessage.message = err.message;
-                errorMessage.error = status.error;
-            }
+        const python = spawn('python', [testDir, req.file.filename]);
+        var results
+        python.stdout.on('data', function (data) {
+            results = data.toString().split('\r\n');
+        })
+        python.on('close', (code) => {
             successMessage.file = req.file;
-            // successMessage.value = parseFloat(results[0]);
-            successMessage.status = results;
+            successMessage.value = parseFloat(results[0]);
+            successMessage.status = results[1];
             res.send(successMessage);
-        });
+        })
     }
 }
