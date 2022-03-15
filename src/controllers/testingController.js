@@ -5,7 +5,7 @@ const PythonShell = require('python-shell').PythonShell;
 
 module.exports = {
     postSoundToTest: async (req, res) => {
-        const testDir = __dirname + '/detection/testing.py';
+        const testDir = '/app/src/controllers/detection/testing.py';
 
         var options = {args: [req.file.filename]};
           
